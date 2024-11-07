@@ -1,0 +1,144 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connect-access-control-deployment
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      annotations:
+        injector.tumblr.com/request: "vault-auth"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8081"
+        prometheus.io/scheme: http
+        prometheus.io/scrape: "true"
+        prometheus.istio.io/merge-metrics: "true"
+        observability.volvocars.com/log-format: json
+        sidecar.istio.io/inject: "false"
+    spec:
+      containers:
+        - name: connect-access-control-container
+          image: image
+          volumeMounts:
+            - name: access-control-secret-store-volume
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          imagePullPolicy: Always
+          env:
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.memory
+            - name: GOMAXPROCS
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.cpu
+            - name: CACHE_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: CACHE_BASE_URL
+            - name: CACHE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: CACHE_CLIENT_ID
+            - name: CACHE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: CACHE_CLIENT_SECRET
+            - name: CACHE_TOKEN_URL
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: CACHE_TOKEN_URL
+            - name: CACHE_SCOPES
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: CACHE_SCOPES
+            - name: PLUMS_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_BASE_URL
+            - name: PLUMS_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_CLIENT_ID
+            - name: PLUMS_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_CLIENT_SECRET
+            - name: PLUMS_USER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_USER_KEY
+            - name: PLUMS_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_ISSUER
+            - name: PLUMS_AUDIENCE
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_AUDIENCE
+            - name: PLUMS_SCOPES
+              valueFrom:
+                secretKeyRef:
+                  name: access-control-credentials
+                  key: PLUMS_SCOPES
+            - name: TRACER_ENDPOINT_URL
+              value: "http://elastic-cloud.elastic-cloud.svc.cluster.local:8223"
+            - name: IAM_ROOT_DIR
+              value: "/iam"
+
+          ports:
+            - name: main
+              containerPort: 8080
+              protocol: TCP
+            - name: admin
+              containerPort: 8081
+              protocol: TCP
+
+          livenessProbe:
+            failureThreshold: 10
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            httpGet:
+              path: /livez
+              port: 8081
+
+          readinessProbe:
+            failureThreshold: 10
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            httpGet:
+              path: /readyz
+              port: 8081
+
+          resources:
+            limits:
+              cpu: 400m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+
+      volumes:
+        - name: access-control-secret-store-volume
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: access-control-secret-provider-class

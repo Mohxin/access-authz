@@ -1,0 +1,10 @@
+permission_groups:
+  - key: view_user_details
+    label: View user details
+    description: Look at, search for and export user information based on your access domains (e.g., retail locations or R&D projects)
+  - key: manage_user_details
+    label: Manage professional users
+    description: Change information for external users, give or remove roles for all users based on your own access domains (e.g. retail groups and locations or R&D projects) and turn accounts on or off for external users
+  - key: assign_admin_rights
+    label: Assign admin rights
+    description: Give or take away user admin role for others within your access domains

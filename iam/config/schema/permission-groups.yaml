@@ -1,0 +1,20 @@
+type: object
+required:
+  - permission_groups
+properties:
+  permission_groups:
+    type: array
+    items:
+      type: object
+      required:
+        - key
+        - label
+        - description
+      properties:
+        key:
+          type: string
+          pattern: "^[a-zA-Z-_]+$"
+        label:
+          type: string
+        description:
+          type: string

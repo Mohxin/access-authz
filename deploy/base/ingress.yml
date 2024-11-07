@@ -1,0 +1,48 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: connect-access-control-virtual-service
+spec:
+  gateways:
+    - connect-access-control-gateway
+  hosts:
+    - PUBLIC-URL
+  http:
+    - match:
+        - uri: # Redirect to API
+            prefix: /v1
+        - uri:
+            prefix: /swagger # Redirect to Swagger
+      route:
+        - destination:
+            host: connect-access-control-service
+            port:
+              number: 8080
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: connect-access-control-gateway
+  annotations:
+    external-dns.alpha.kubernetes.io/target: DNS-IP
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - PUBLIC-URL
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+    - hosts:
+        - PUBLIC-URL
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: cluster-domain-wildcard-cert

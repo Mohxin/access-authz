@@ -1,0 +1,10 @@
+client:
+  id: connect-shell
+  name: Connect Shell
+  description: Connect Shell
+  whitelisted_domains:
+    - "*.connect.com"
+  dependant_scopes:
+    - scope-x
+    - scope-y
+    - scope-z

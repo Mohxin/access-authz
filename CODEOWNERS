@@ -1,0 +1,4 @@
+*                                   @volvo-cars/prmp
+/iam/config/*                       @volvo-cars/prmp
+/iam/scopes/notification/*          @volvo-cars/prmp
+/iam/scopes/user-admin/*            @volvo-cars/prmp

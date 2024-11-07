@@ -1,0 +1,5 @@
+scope:
+  key: user-admin
+  label: User Admin
+  description: User Admin scope
+  type: functionality

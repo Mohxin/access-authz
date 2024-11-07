@@ -1,0 +1,91 @@
+roles:
+  - id: 2e2e1320-4038-4110-a17e-02b3ac530488
+    name: Used Car sales advisor
+    description: Sells used cars
+  - id: 264f84c1-cdbd-4dd2-aed9-0d9145f20f33
+    name: Service administrator
+    description: Responsible for overseeing all aspects of the work order for a service department
+  - id: 6e4a2be4-5bcf-4efd-af9d-10ccb485eb25
+    name: Managing Director
+    description: The person who is in overall charge of the running of an organization or business
+  - id: 27dd16cc-a356-4015-a3e0-22f46929ecb8
+    name: Fleet sales manager
+    description: Manager of fleet sales advisors
+  - id: 20a97e41-253a-4c2c-baeb-238cffdbb488
+    name: Personal service Technician
+    description: A customer interacting automotive technician
+  - id: 23bc7158-7983-4910-bda3-27dffdc45d6d
+    name: Used Car Manager
+    description: Manager of Used Car sales advisors
+  - id: 95c9df2c-9921-44a9-9b43-36a40df50030
+    name: Service advisor
+    description: A professional who assists customers at a car dealership to understand their car''s maintenance or repair options
+  - id: ad560122-9e1b-49b0-aa00-45850ea8e791
+    name: Service Manager
+    description: Leads a company''s service department to manage customer interactions
+  - id: 36e978de-f8e1-45b4-b3a8-57280c6179f1
+    name: Customer Champion
+    description: Individuals who can represent the customer and their experience in internal discussions so you maintain focus on their needs
+  - id: 63795d1c-c1aa-4e43-8f86-57d3fb000096
+    name: Booking Agent
+    description: An agent that makes bookings at the facility
+  - id: 08ddc903-f90e-4ab4-8923-59d9fed53333
+    name: Workshop Manager
+    description: Managing the whole workshop
+  - id: e06659df-d750-4b84-909e-6413f35f6146
+    name: New cars sales advisor
+    description: Sells new cars
+  - id: be963e06-56f8-4826-ac23-6ccb93f08e03
+    name: Headmaster
+    description: The headmaster of a school is a staff member having the highest responsibility for the management of the school
+  - id: e8416941-b1b0-4d8c-9e43-6fbfed8dff3c
+    name: Driver
+    description: Car logistics
+  - id: bb750543-cc8f-43e6-b3ef-8298509de2f7
+    name: Parts Manager
+    description: Responsible for handling and ordering of car parts and spare parts
+  - id: 35d1e3d7-c453-4a15-a1e1-8fd021e46434
+    name: User Administrator
+    description: Manages users and assign roles.
+  - id: 42f99981-60ed-4974-85dd-98e1fc214c7b
+    name: Technician
+    description: An automotive technician
+  - id: 39d21c1c-b70f-4e8b-a87b-9d6c34d17424
+    name: Sales Administrator
+    description: Process sales orders and payments, arrange deliveries and offer after-sales support
+  - id: c5218956-f936-4c60-9bc2-a150ec48fffd
+    name: Product Expert
+    description: The people who know everything there is to know about a particular product or service
+  - id: a22c53d9-2f96-41eb-b9d6-a9fbc9e4a9ce
+    name: Finance / Business manager
+    description: A supervisor who leads and oversees an organization or a department''s employees and operations
+  - id: 09f3c3fd-1f62-4ed2-8fde-b504431afa23
+    name: Host / Receptionist
+    description: Facility host / Receptionist
+  - id: d4b36929-9730-40ad-bce4-b8f01fef24ab
+    name: Warranty administrator
+    description: Guides all phases of the repair process when a replacement part is in need for cars
+  - id: a4225ce7-ad3d-4078-aeb6-da2c6d774a61
+    name: PX
+    description: Member of Human Resources team / People Experience team
+  - id: baf3286e-fdd9-45a6-9064-e058fc9691aa
+    name: Head of Business
+    description: A person who is entrusted with the overall management of any department within the Company
+  - id: 7a8273d5-6836-41f7-85f8-e598235ed0a8
+    name: Master technician
+    description: Indicate that an automotive technician has achieved a certain level of training
+  - id: 8401bdf8-c562-4348-aab2-e649147af2d1
+    name: Marketing
+    description: Responsible for promoting a company and the product and services it sells
+  - id: 7e019278-83a2-43cb-994b-ea5447b8cb75
+    name: Fleet Administrator
+    description: A professional responsible for overseeing a company''s fleet vehicles
+  - id: 4ca57d8f-0727-48dd-ac21-f56a3389b08a
+    name: Parts advisor
+    description: Responsible for timely parts ordering and managing parts stock held
+  - id: d1db8f11-ce65-40fa-8948-f9636c963d13
+    name: New cars sales manager
+    description: Manager of new cars sales advisors
+  - id: 89739116-d748-4f3d-98fc-fe54055da3ac
+    name: Fleet sales advisor
+    description: Sells company cars

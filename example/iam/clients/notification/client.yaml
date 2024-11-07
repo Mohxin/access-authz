@@ -1,0 +1,9 @@
+client:
+  id: notification
+  name: Notification
+  description: Notification Service
+  whitelisted_domains:
+    - "*.connect.com"
+  dependant_scopes:
+    - scope-x
+    - scope-z

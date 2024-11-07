@@ -1,0 +1,24 @@
+type: object
+required:
+  - scope
+properties:
+  scope:
+    type: object
+    required:
+      - key
+      - label
+      - description
+      - type
+    properties:
+      key:
+        type: string
+        pattern: "^[a-zA-Z-_]+$"
+      label:
+        type: string
+      description:
+        type: string
+      type:
+        type: string
+        enum:
+          - functionality
+          - data

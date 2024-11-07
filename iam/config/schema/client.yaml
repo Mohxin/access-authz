@@ -1,0 +1,29 @@
+type: object
+required:
+  - client
+properties:
+  client:
+    type: object
+    required:
+      - id
+      - name
+      - description
+      - whitelisted_domains
+      - dependant_scopes
+    properties:
+      id:
+        type: string
+        pattern: "^[a-zA-Z-_]+$"
+      name:
+        type: string
+      description:
+        type: string
+      whitelisted_domains:
+        type: array
+        items:
+          type: string
+          pattern: "^(\\*\\.)?[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" # Matches domains and wildcard domains
+      dependant_scopes:
+        type: array
+        items:
+          type: string

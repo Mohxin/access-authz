@@ -1,0 +1,15 @@
+user:
+  cdsid: ivankov
+  mapping:
+    - partnerId: example_id
+      partnerType: PARMA
+      isPrimary: true
+      scope: scope-y
+      permission_groups:
+        - notification_administration
+    - partnerId: example_id_2
+      partnerType: PARMA
+      isPrimary: false
+      scope: scope-x
+      permission_groups:
+        - user_administration

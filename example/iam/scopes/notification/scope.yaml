@@ -1,0 +1,4 @@
+scope:
+  key: notification
+  label: Notification
+  description: Notification Service scope

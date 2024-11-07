@@ -1,0 +1,31 @@
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+      LOG_LEVEL: debug
+    ports:
+      - "16686:16686" # Jaeger UI http://localhost:16686
+      - "6831:6831/udp" # Jaeger Thrift UDP (used by most SDKs)
+      - "6832:6832/udp" # Jaeger Thrift UDP (used by Node.js SDK)
+      - "4317:4317" # OTLP gRPC receiver
+      - "4318:4318" # OTLP http receiver
+
+  server:
+    build:
+      context: ..
+      args:
+        GITHUB_TOKEN: "${GITHUB_TOKEN}"
+    container_name: api-server
+    command: /app/go-app
+    restart: always
+    env_file: ../.env
+    environment:
+      TRACER_ENDPOINT_URL: http://jaeger:4318
+      IAM_ROOT_DIR: /iam
+    depends_on:
+      - jaeger
+    ports:
+      - "8080:8080"
+      - "8081:8081"

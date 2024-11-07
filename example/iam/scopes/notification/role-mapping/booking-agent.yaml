@@ -1,0 +1,9 @@
+role:
+  id: 63795d1c-c1aa-4e43-8f86-57d3fb000096
+  mapping:
+    - filter:
+        user_type:
+          - INTERNAL
+          - EXTERNAL
+      permission_groups:
+        - manage_inbox

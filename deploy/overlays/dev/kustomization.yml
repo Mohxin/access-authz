@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+images:
+- name: image
+  newName: ghcr.io/volvo-cars/connect-access-control
+  newTag: REPLACE
+
+patches:
+  - target:
+      kind: Deployment
+    path: ./env.yml
+
+  - path: ./virtual-service.yaml
+    target:
+      kind: VirtualService
+      
+  - path: ./gateway.yaml
+    target:
+      kind: Gateway
+
+  - target:
+      kind: SecretProviderClass
+    patch: |-
+      - op: replace
+        path: /spec/parameters/vaultAddress
+        value: https://vault.weu-dev.ecpaz.volvocars.biz/
+
+labels:
+- includeSelectors: true
+  pairs:
+    app: connect-access-control
+
+resources:
+- ../../base

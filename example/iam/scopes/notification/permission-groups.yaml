@@ -1,0 +1,7 @@
+permission_groups:
+  - key: notification_administration
+    label: Notification Administration
+    description: Manages and send notifications
+  - key: manage_inbox
+    label: manage Inbox
+    description: View, Mark read/Unread Inbox and Manage alerts 

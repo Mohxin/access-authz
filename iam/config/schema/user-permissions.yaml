@@ -1,0 +1,37 @@
+type: object
+required:
+  - user
+properties:
+  user:
+    type: object
+    required:
+      - cdsid
+      - mapping
+    properties:
+      cdsid:
+        type: string
+      mapping:
+        type: array
+        items:
+          type: object
+          required:
+            - partnerId
+            - partnerType
+            - isPrimary
+            - scope
+            - permission_groups
+          properties:
+            partnerId:
+              type: string
+              format: uuid
+            partnerType:
+              type: string
+              enum: ["PARMA"]
+            isPrimary:
+              type: boolean
+            scope:
+              type: string              
+            permission_groups:
+              type: array
+              items:
+                type: string

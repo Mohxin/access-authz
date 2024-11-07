@@ -1,0 +1,42 @@
+type: object
+required:
+  - role
+properties:
+  role:
+    type: object
+    required:
+      - id
+      - mapping
+    properties:
+      id:
+        type: string
+        format: uuid
+      mapping:
+        type: array
+        items:
+          type: object
+          required:
+            - permission_groups
+          properties:
+            filter:
+              type: object
+              properties:
+                market:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["SE", "NO", "UK", "DE", "US", "GB"]
+                user_type:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["INTERNAL", "EXTERNAL"]
+                partner_type:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["NSC", "PARMA"]
+            permission_groups:
+              type: array
+              items:
+                type: string

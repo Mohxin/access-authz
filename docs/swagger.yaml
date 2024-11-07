@@ -1,0 +1,519 @@
+basePath: /v1
+definitions:
+  Client:
+    properties:
+      dependant_scopes:
+        items:
+          type: string
+        type: array
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      whitelisted_domains:
+        items:
+          type: string
+        type: array
+    type: object
+  ClientResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Client'
+    type: object
+  ClientsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Client'
+        type: array
+    type: object
+  Context:
+    properties:
+      id:
+        type: string
+      tag:
+        type: string
+      type:
+        type: string
+    type: object
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  ErrorResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+    type: object
+  Filter:
+    properties:
+      market:
+        items:
+          type: string
+        type: array
+      partner_type:
+        items:
+          type: string
+        type: array
+      user_type:
+        items:
+          type: string
+        type: array
+    type: object
+  Mapping:
+    properties:
+      filter:
+        $ref: '#/definitions/Filter'
+      permission_groups:
+        items:
+          type: string
+        type: array
+    type: object
+  Partner:
+    properties:
+      active:
+        type: boolean
+      distributor_id:
+        type: string
+      id:
+        type: string
+      market:
+        type: string
+      name:
+        type: string
+      parma_partner_code:
+        type: string
+      role_code:
+        type: string
+      roles:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    type: object
+  PermissionGroup:
+    properties:
+      description:
+        type: string
+      key:
+        type: string
+      label:
+        type: string
+    type: object
+  Role:
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  RoleMapping:
+    properties:
+      id:
+        type: string
+      mapping:
+        items:
+          $ref: '#/definitions/Mapping'
+        type: array
+    type: object
+  RoleMappingResponse:
+    properties:
+      data:
+        $ref: '#/definitions/RoleMapping'
+    type: object
+  RoleMappingsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/RoleMapping'
+        type: array
+    type: object
+  RoleResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Role'
+    type: object
+  RolesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Role'
+        type: array
+    type: object
+  Scope:
+    properties:
+      description:
+        type: string
+      key:
+        type: string
+      label:
+        type: string
+      permission_groups:
+        items:
+          $ref: '#/definitions/PermissionGroup'
+        type: array
+    type: object
+  ScopeResponse:
+    properties:
+      data:
+        $ref: '#/definitions/Scope'
+    type: object
+  ScopesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Scope'
+        type: array
+    type: object
+  User:
+    properties:
+      cdsid:
+        type: string
+      country_code:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      partners:
+        items:
+          $ref: '#/definitions/Partner'
+        type: array
+    type: object
+  UserAccess:
+    properties:
+      context:
+        $ref: '#/definitions/Context'
+      permission_groups:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        type: object
+      roles:
+        items:
+          type: string
+        type: array
+    type: object
+  UserAccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/UserAccess'
+    type: object
+  UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/User'
+    type: object
+info:
+  contact: {}
+  description: Access Control API for the Volvo Cars Connect platform.
+  title: Access Control API
+  version: "1.0"
+paths:
+  /iam/clients:
+    get:
+      consumes:
+      - application/json
+      description: get all clients
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get clients
+      tags:
+      - clients
+  /iam/clients/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get client by ID
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ClientResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get client
+      tags:
+      - clients
+  /iam/roles:
+    get:
+      consumes:
+      - application/json
+      description: get all roles
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/RolesResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get roles
+      tags:
+      - roles
+  /iam/roles/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get role by ID
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/RoleResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get role
+      tags:
+      - roles
+  /iam/scopes:
+    get:
+      consumes:
+      - application/json
+      description: get all scopes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ScopesResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get scopes
+      tags:
+      - scopes
+  /iam/scopes/{scopeKey}:
+    get:
+      consumes:
+      - application/json
+      description: get scope by key
+      parameters:
+      - description: Scope key
+        in: path
+        name: scopeKey
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ScopeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get scope
+      tags:
+      - scopes
+  /iam/scopes/{scopeKey}/mappings:
+    get:
+      consumes:
+      - application/json
+      description: get all role mappings for a scope
+      parameters:
+      - description: Scope key
+        in: path
+        name: scopeKey
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/RoleMappingsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get role mappings
+      tags:
+      - scopes
+  /iam/scopes/{scopeKey}/mappings/{roleID}:
+    get:
+      consumes:
+      - application/json
+      description: get role mapping by scope and role ID
+      parameters:
+      - description: Scope key
+        in: path
+        name: scopeKey
+        required: true
+        type: string
+      - description: Role ID
+        in: path
+        name: roleID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/RoleMappingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get role mapping
+      tags:
+      - scopes
+  /iam/users/{cdsid}:
+    get:
+      consumes:
+      - application/json
+      description: get user by CDSID
+      parameters:
+      - description: User CDSID
+        in: path
+        name: cdsid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/UserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get user
+      tags:
+      - users
+  /iam/users/{cdsid}/access:
+    get:
+      consumes:
+      - application/json
+      description: get all access for a user
+      parameters:
+      - description: User CDSID
+        in: path
+        name: cdsid
+        required: true
+        type: string
+      - collectionFormat: csv
+        description: Scope key
+        in: query
+        items:
+          type: string
+        name: scope
+        required: true
+        type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/UserAccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: get user access
+      tags:
+      - users
+swagger: "2.0"

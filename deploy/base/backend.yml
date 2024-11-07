@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: connect-access-control-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: connect-access-control-monitor
+spec:
+  endpoints:
+    - path: /metrics
+      port: admin
+      scheme: http
+  selector:
+    matchLabels:
+      app: connect-access-control
